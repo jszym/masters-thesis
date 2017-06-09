@@ -8,6 +8,7 @@ base:
   font_size: 12
   line_height_length: 20
   line_height: $base_line_height_length / $base_font_size
+  align: justify
 vertical_spacing: $base_line_height_length
 heading:
   font_color: #262626
