@@ -1,1 +1,2 @@
-**/*.pdf
+output/pdf/*.pdf
+output/html/*.html
