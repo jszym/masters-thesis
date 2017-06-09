@@ -26,6 +26,7 @@ footer:
     right:
       content: '{section-title} | *{page-number}*'
 link:
-  font_color: #002FA7
+  font_color: #333333
+  #font_color: #002FA7
 outline_list:
   indent: $base_font_size * 1.5
