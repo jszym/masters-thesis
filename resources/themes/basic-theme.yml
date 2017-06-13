@@ -1,10 +1,22 @@
+font:
+  catalog:
+    HelveticaUTF8:
+      normal: fonts/helvetica/helvetica.ttf
+      italic: fonts/helvetica/helvetica-italic.ttf
+      bold: fonts/helvetica/helvetica-bold.ttf
+      bold_italic: fonts/helvetica/helvetica-bold-italic.ttf
+    HelveticaWorld:
+      normal: fonts/helvetica-world/HelveticaWorld-Regular.ttf
+      italic: fonts/helvetica-world/HelveticaWorld-Italic.ttf
+      bold: fonts/helvetica-world/HelveticaWorld-Bold.ttf
+      bold_italic: fonts/helvetica-world/HelveticaWorld-BoldItalic.ttf
 page:
   layout: portrait
   margin: [1in, 1in, 1in, 1in]
   size: Letter
 base:
   font_color: #333333
-  font_family: Helvetica
+  font_family: HelveticaWorld
   font_size: 12
   line_height_length: 20
   line_height: $base_line_height_length / $base_font_size

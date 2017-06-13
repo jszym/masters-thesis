@@ -1,2 +1,3 @@
 output/pdf/*.pdf
 output/html/*.html
+resources/themes/fonts/*
