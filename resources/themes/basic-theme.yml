@@ -37,3 +37,7 @@ link:
   #font_color: #002FA7
 outline_list:
   indent: $base_font_size * 1.5
+admonition:
+  icon:
+    note:
+      name: fa-info-circle
