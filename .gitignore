@@ -1,2 +1,11 @@
-output/pdf/*.pdf
-output/html/*.html
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.xml
+*.synctex.gz
+*.toc
+resources
+resources/*

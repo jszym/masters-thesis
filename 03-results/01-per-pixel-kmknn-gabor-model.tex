@@ -1,0 +1,68 @@
+\section{Machine-Learning-Based Regional Early-Lesion Recognition}
+
+Whole-image machine-learning-based classifiers of early breast lesions
+from microscopy images of breast biopsies with various accuracy rates have been
+previously described. While these models are effective at detecting which stage
+is most represented within a lesion, this poorly reflects the heterogenous nature
+of breast cancers. Furthermore, whole-image classifiers offer little information
+when presented with so-called ``borderline'' lesions, that exhibit
+characteristics of many early lesions in near-equal measure.\par
+
+A model capable of classifying regions of a given image of a lesion would
+offer an added dimension of information that takes into account the heterogenous
+nature of cancers, while also providing reproducible, quantifiable insight into
+currently enigmatic "`borderline`" lesions.\par
+
+\subsection{Per-Pixel Gabor-Filter-Based Classification kMKNN Model of Early Breast Lesions}
+In a first attempt at developing such a classifier, a kMKNN model was trained on
+per-pixel Gabor-filter features of confocal imagery of mammary glands
+immunohistochemically stained for E-cadherin and Par-6. This model will be
+referred to as the Gabor-kMKNN model hereafter.\par
+
+As the characteristic ``cobblestone'' epithelial phenotype is altered distinctly
+in both ADH and DCIS, it was hypothesised that a model trained on texture-based
+features would be sufficient in classifying those lesions. For this reason, the
+Gabor-filter was chosen. Analagous to the manner in which simple cortical cells
+perceive patterns and texture, the Gabor filter and has long been used to
+programmatically discern textures from one another
+(Fogel \& Sagi 1989, Marĉelja 1980).\par
+
+Gabor features were extracted in a similar fashion as Melendez \emph{et al.} 2008 and is described by \emph{Figure 1}. Namely, for each pixel in an image, six windows of increasing size ($3\times3$, $5\times5$, $9\times9$, $17\times17$, $33\times33$, $65\times65$) centered on the pixel are defined. Each window is then filtered through four Gabor kernels with quarter-turn orientations (\emph{i.e.}: $\theta = \left\{\frac{1}{2}\pi, \pi, \frac{3}{2}\pi, 2\pi \right\}$). Each Gabor kernel also has a sinusoidal wavelength of 0.25 pixels ($\lambda = 0.25$), which has been previously described as providing good discrimination in general-purpose texture classification
+(Manjunath \& Ma 1996).\par
+
+%figure
+%Diagram illustrating the method by which Gabor features are extracted from images in the Gabor-kMKNN model
+
+The mean and the standard deviation of the resulting Gabor energies are then
+added to a vector for the relevant pixel. This results in a total of 48 features
+per pixel (6 windows $\times$ 4 orientations $\times$ [1 mean + 1 standard deviation] = 48
+feature per pixel).\par
+
+To reduce computational complexity, images are resized to a resolution of
+$256\times256$ pixels. Computation time of training can be further reduced by
+extracting the features of a smaller randomly sampling of pixels from the
+total population.
+
+Following the $k$-means for $k$-nearest neighbor
+($k$M$k$NN) model described by Wang 2011, the resultant 48-dimensional
+matrix is clustered using the $k$-means algorithm. The number of
+clusters is determined using the heuristic:
+
+$$
+k_c = \left \lceil{2\sqrt(n)}\right \rceil
+$$
+
+Where $k_c$ is the number of clusters to compute, and $n$
+is the number of elements to cluster. If features were computed for all 65,536
+pixels in a $256\times256$ image, a total of 512 clusters would be computed
+$\left(k_c = \left \lceil{2\sqrt(65,536)}\right \rceil = 512\right)$.
+
+The process of classifying a pixel ($p$) begins by calculating the 48 Gabor
+energy means and standard deviations of $p$ as described above. The nearest
+cluster ($C'$) is determined by choosing the cluster with the minimum Euclidean
+distances between its centroid and the feature vector of $p$. $p$ is then
+classified using the standard $K$-nearest neighbor algorithm with
+feature vectors contained in $C'$ and a $K$-value of 3.
+
+While the Gabor-kMKNN model was efficient at identifying distinct textures in
+images composed of multiple MeasTex

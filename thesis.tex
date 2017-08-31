@@ -1,0 +1,84 @@
+\documentclass[12pt,a4paper,twoside]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{etoolbox}
+
+\makeatletter
+\pretocmd{\@sect}{\singlespacing}{}{}
+\pretocmd{\@ssect}{\singlespacing}{}{}
+\apptocmd{\@sect}{\doublespacing}{}{}
+\apptocmd{\@ssect}{\doublespacing}{}{}
+\makeatother
+
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+
+\makeatletter
+\def\@makechapterhead#1{%
+	\vspace*{50\p@}%
+	{\parindent \z@ \raggedright \normalfont
+		\interlinepenalty\@M
+		\Huge\bfseries  \thechapter.\quad #1\par\nobreak
+		\vskip 40\p@
+}}
+\makeatother
+
+\begin{document}
+
+%front matter
+\pagenumbering{gobble}
+\input{00-front-matter/01-title-page.tex}
+\pagenumbering{roman}
+\input{00-front-matter/02-abstract.tex}
+\input{00-front-matter/03-resume.tex}
+\input{00-front-matter/04-acknowledgements.tex}
+\input{00-front-matter/05-contributions.tex}
+\input{00-front-matter/06-abbreviations.tex}
+
+\onehalfspacing
+\tableofcontents
+\pagenumbering{gobble}
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{}
+\fancyhead[RE,LO]{\it\rightmark}
+\fancyfoot[CE,CO]{}
+\fancyfoot[LE,RO]{\thepage}
+\renewcommand{\footrulewidth}{0.5pt}
+
+%main matter
+\doublespacing
+\pagenumbering{arabic}
+
+%introduction
+\input{01-introduction/00-introduction.tex}
+
+%materials and methods
+\input{02-materials-and-methods/00-materials-and-methods.tex}
+
+%results
+\input{03-results/00-results.tex}
+
+%discussion
+\input{04-discussion/00-discussion.tex}
+
+%bibliography
+\onehalfspacing
+\bibliographystyle{authordate1}
+\bibliography{references}
+\inputencoding{utf8}
+
+
+\end{document}
