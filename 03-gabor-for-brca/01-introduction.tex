@@ -1,0 +1,28 @@
+\section{Introduction}
+
+\subsection{Current Practices for the Diagnosis of Breast Cancers}
+
+The current standard of care for the diagnosis of breast cancer is the histopathological analysis of tissue biopsies \citep{nccn}. Sections from biopsy tissue are routinely stained with hematoxilin and eosin (H\&E) and immunohistochemical studies performed to detect the presence of the HER2 oncogene and the estrogen and progesterone receptors \citep{who_intro}.\par
+
+Despite the standardised and continually refined methods and guidelines clinical pathologists rely on to identify breast cancer lesions from histological sections, there is a great deal of inconsistency and uncertainty that is becoming increasingly apparent. While some types of breast cancer (such as high-grade DCIS and LCIS) are more consistently and reliably identified than others, inter-observer agreement between clinical pathologists is mixed. In a retrospective study, agreement between pathologists for ADH, FEA, and low-grade DCIS regions was only moderate (0.44, 0.47, and 0.47 Cohen's $\kappa$ statistic, respectively) \citep{gomes2014}.\par
+
+\subsection{Conventional Machine-Learning Models for the Diagnosis of Breast Cancers}
+
+While computer-aided detection (CADe) is sometimes used to enhance interpretation of imaging from screening mammographies, computational models are not currently used in most clinical settings to assist the diagnosis of breast cancers.\par
+
+Models using conventional supervised machine-learning (ML) algorithms, such as support-vector machines (SVMs) or random decision forests (RDFs), have been previously described with varying success rates \citep{anuranjeeta2017, gertych2015}. These models depend on automatically extracted features hand-picked by their designers. The features chosen to train such models are directly related to existing pathological guidelines (\emph{e.g.}: nuclear size and spacing) or inferred by them (\emph{e.g.}: texture-based features such as Gabor filters and Harlick transforms) \citep{anuranjeeta2017, doyle2008}.\par
+
+
+%%%%%%%%%%%%%%%%%
+%Whole-image machine-learning-based classifiers of early breast lesions
+%from microscopy images of breast biopsies with various accuracy rates have been
+%previously described. While these models are effective at detecting which stage
+%is most represented within a lesion, this poorly reflects the heterogenous nature
+%of breast cancers. Furthermore, whole-image classifiers offer little information
+%when presented with so-called ``borderline'' lesions, that exhibit
+%characteristics of many early lesions in near-equal measure.\par
+
+%A model capable of classifying regions of a given image of a lesion would
+%offer an added dimension of information that takes into account the heterogenous
+%nature of cancers, while also providing reproducible, quantifiable insight into
+%currently enigmatic "`borderline`" lesions.\par

@@ -27,12 +27,15 @@
 
 \makeatletter
 \def\@makechapterhead#1{%
-	\vspace*{50\p@}%
+	\singlespacing
+	\vspace*{30\p@}%
 	{\parindent \z@ \raggedright \normalfont
 		\interlinepenalty\@M
-		\Huge\bfseries  \thechapter.\quad #1\par\nobreak
-		\vskip 40\p@
-}}
+		\huge\bfseries  \thechapter.\quad #1\par\nobreak
+		\vskip 20\p@
+}
+\doublespacing
+}
 \makeatother
 
 \begin{document}
@@ -44,8 +47,8 @@
 \input{00-front-matter/02-abstract.tex}
 \input{00-front-matter/03-resume.tex}
 \input{00-front-matter/04-acknowledgements.tex}
-\input{00-front-matter/05-contributions.tex}
-\input{00-front-matter/06-abbreviations.tex}
+\input{00-front-matter/05-abbreviations.tex}
+\input{00-front-matter/06-preface.tex}
 
 \onehalfspacing
 \tableofcontents
@@ -61,18 +64,19 @@
 %main matter
 \doublespacing
 \pagenumbering{arabic}
-
 %introduction
+
 \input{01-introduction/00-introduction.tex}
 
-%materials and methods
-\input{02-materials-and-methods/00-materials-and-methods.tex}
+\input{02-tj-early-brca/00-tj-early-brca.tex}
+\input{03-gabor-for-brca/00-gabor-for-brca.tex}
+\input{04-deepduct/00-deepduct.tex}
 
 %results
-\input{03-results/00-results.tex}
+%\input{03-results/00-results.tex}
 
 %discussion
-\input{04-discussion/00-discussion.tex}
+\input{05-discussion/00-discussion.tex}
 
 %bibliography
 \onehalfspacing
