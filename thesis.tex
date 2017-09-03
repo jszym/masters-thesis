@@ -8,6 +8,9 @@
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{etoolbox}
+\usepackage{endnotes}
+
+\let\footnote=\endnote
 
 \makeatletter
 \pretocmd{\@sect}{\singlespacing}{}{}
@@ -84,5 +87,6 @@
 \bibliography{references}
 \inputencoding{utf8}
 
+\theendnotes
 
 \end{document}
