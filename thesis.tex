@@ -10,9 +10,16 @@
 \usepackage{etoolbox}
 \usepackage{endnotes}
 \usepackage{graphicx}
-\usepackage[format=plain,
-labelfont=it,
-textfont=plain]{caption}
+\usepackage[labelfont=it]{caption}
+\usepackage{lscape}
+\usepackage{ array, blindtext}
+\usepackage{tabularx,ragged2e,booktabs}
+\usepackage[export]{adjustbox}
+\usepackage{soul}
+
+
+\newcolumntype{C}[1]{>{\Centering}m{#1}}
+\renewcommand\tabularxcolumn[1]{C{#1}}
 
 \let\footnote=\endnote
 
