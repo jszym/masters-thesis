@@ -1,1 +1,8 @@
 \section{Discussion}
+
+Neural networks have the advantage of dynamically ``learning'' and optimising features, as opposed to relying on a manual process of feature engineering that is often driven by limited powers of intuition and conventional knowledge. The automated process of feature engineering allows for the potential discovery of new underlying concepts previously not described in the literature that fundamentally define a class from others, and also prevents assumptions and misconceptions from biasing features and the resulting inaccuracies.\par
+
+
+The automated nature of feature selection in neural networks can also pose challenges if the dataset is of low-quality or very small; as differences between classes that are present in the dataset, but do not reflect differences between the classes as a concept, can severely bias a model. This is epitomised by the parable of ``the tank problem'', whereby a neural network trained by the US government to identify concealed tanks were actually identifying dark skies as the images of tanks in the dataset were taken on a cloudy day \citep{dreyfus1992}. Errors such as these are mitigated by assuring datasets are large and representative of the variation of the population.\par
+
+ 
