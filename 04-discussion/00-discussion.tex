@@ -1,0 +1,67 @@
+\chapter{Discussion}
+
+% What we wanted to achieve with DD and PP?
+%   OVERALL GOAL: Reduce ambiguity and inconsistency in Diagnosis
+%                 for borderline lesions
+%    CURRENT ART: Models exist, but are limited and don't see
+%                 clinical  use.
+%   WHY WE DIF'T: - Regional classification (account for hetero'ous)
+%                 - [PP] Robust Accuracy
+%                 - [DD] Transparency/Learn from Model
+
+The subjective nature of interpretting histopathology, inter-observer disagreement, and reportedly difficult to distinguish early lesions have nescessitated reliably replicatable quantitative methods. Previously proposed automated solutions typically ignore tumour heterogeneity and/or are opaque, so-called ``black-box'' solutions which make them unsuitable for making clinical decisions. The PPReCOGG model, which implements per-pixel texture-based tissue classification, and the DeepDuct model, which leverage a pre-trained ConvNet and class-activation mapping to generate transparent regional classifications, address the aforementioned hurtles faced by previously described systems for automated diagnosis with the aim of demonstrating how clinically relevant models for automated diagnosis can be realised.
+
+\section{Robust Regional Diagnosis with PPReCOGG}
+
+The PPReCOGG model described has here been shown to effectively recognise sub-regions of cell patterning in immunofluorescent confocal imagery, provided a training set that exemplifies said patterns. The PPReCOGG model has here been employed the task of identifying, within images of human breast lesions, cell patterns that are characteristic of early breast lesions. PPReCOGG classification in this task is effective and, thanks to its GPU accelerated implementation, performed in a practical time-frame.\par
+
+\subsection{Model Performance}
+The performance of the PPReCOGG model on the Brodatz texture synthetic benchmark attest to the models proficiency at texture recognition tasks between textures that are easily distinguished by human observers upon casual visual inspection (\textit{Table 3.1}). However, PPReCOGGs true utility is most clearly evinced in the human breast lesion synthetic benchmarks, whereby texture recognition was performed on the test images (\textit{Table 3.2a}) after being trained on a dataset of human lesions. In these visually challenging tasks, PPReCOGG's accuracy is equal to or greater than those observed in the visually distinct Brodatz texture benchmarks.\par
+
+A partial explanation for PPReCOGGs efficiency in both visually distinct and visually challenging texture recognition tasks is provided by the MDS embeddings of the underlying Gabor features of the training set for both the Brodatz and Human Breast Lesion datasets). The MDS embedding of both datasets are remarkably similar, with both classes in each case forming distinct but intersecting planes when scaled to three-dimensional space (\textit{Figure \ref{embeddings}}). The distance between the feature-spaces of each class defines the degree to which it is possible for PPReCOGG to distinguish between them. This is largely due to PPReCOGGs reliance on the $k$-nearest neighbour algorithm for the classification of features.\par
+
+\subsection{Future Directions}
+While the PPReCOGG model readily recognises textural sub-regions within clinical samples, any clinical utility of the PPReCOGG model is dependent on and currently precluded by an immature and incomplete training set. In order for the PPReCOGG model to offer meaningful interpretation and classification of early lesions, a rich dataset is required to capture the many textural manifestations of early lesions. ADH and DCIS lesions are not homogenously or universally comprised of single textures, and so a sufficiently large and comprehensive dataset is required before the PPReCOGG model can be used to identify the many faces of early breast lesions. \par
+
+In addition to a complete training dataset, it is possible to extend the current model to recognise sub-regions according to the identity of neighbouring sub-regions; such that some sub-region identified as belonging to some texture class $A$ would only be reported as belonging to sub-type $X$ if neighbouring regions belong to some texture class $B$ but not $C$. Rule-sets for these contextual classifications can be learned through random-forest models trained on annotated images, manually according to existing pathology guidelines, or some combination of the two. \par
+
+The underlying conventional machine-learning algorithm that is the basis of the \mbox{PPReCOGG} model does shape the nature of the conclusions that can be drawn from its output. Namely, the PPReCOGG model is a manifestation of our current understanding of the histopathology of early breast lesions. While this approach results in highly desirable and much needed quantitative and reproducible interpretation of the pathology of biopsy tissue, PPReCOGG as a consequence does not implement feature learning. This is in contrast to models based on neural network algorithms, which forego feature engineering for hidden layers which discover them independently through optimisation. Careful inspection of the hidden layers of the neural network can potentially lead to understanding of early lesion pathology interpretation previously overlooked or otherwise unknown, however such interpretation is nuanced and often provide incomplete ``snapshots'' of the internal state of the network \citep{erhan2010, zeiler2013}. The DeepDuct model was designed with these concerns in mind.\par
+
+\section{DeepDuct}
+
+% Summary of what you've done
+The DeepDuct model described herein provides a proof-of-concept framework for the localisation of breast lesions from H\&E staining that does not rely on manual feature selection, transparently reports explanations for its predictions via class activation maps and allows for the potential discovery of new features that could inform future manual diagnosis.\par
+
+% Why it's important
+Neural networks have the advantage of dynamically ``learning'' and optimising features, as opposed to relying on a manual process of feature engineering that is often driven by limited powers of intuition and conventional knowledge. The automated process of feature engineering allows for the potential discovery of new underlying concepts previously not described in the literature that fundamentally define a class from others, and also prevents assumptions and misconceptions from biasing features and the resulting inaccuracies.\par
+
+%Realising the impact that opaqueness has on the practicality of classifiers in these critical contexts, solutions have been created to provide insight and understanding regarding how models have arrived at their predictions, such as LIME and Grad-CAM \citep{}. To the author's understanding, DeepDuct is the first application of such technology to the classification and localisation of breast lesions from H\&E.
+\subsection{Explanations for Neural Network Predictions are Essential for Clinical Use of CADe/x Models}
+
+% How it stacks up to things other people have done
+Whole-image ConvNet classification models fine-tuned on the BreakHis dataset have been previously described reporting high-accuracy, as well as patch-based whole-slide classifiers which apply whole-image classification to small patches of an imaged slide resulting, in a form of tumour localisation \citep{han2017, wang2016}. None of these models, however, offer the same extent of transparency and resolution offered by the activation maps provided by the Grad-CAM algorithm used in the DeepDuct model. Existing models of breast lesion classification and localisation remain ``black-box'' solutions to end-users, particularly those without in-depth knowledge of deep learning algorithms.\par
+
+Unique among deep-learning based breast lesion classifiers, DeepDuct reports which regions of the input image have lead the model to classify the image as it had. This simultaneously allows for general localisation of classified objects and a glimpse into the internal state of the model, informing and not prescribing a diagnosis. This transparency is essential for a model to see use in contexts such as clinical settings where acting on predictions in blind faith is not an option due to the high-risk associated with the decisions being made. Models that implement ``explanations'' for their predictions have indeed been shown to increase end-user trust in model predictions, as well as help identify false-positive predictions made by a given model \citep{ribeiro2016}. To the author's understanding, DeepDuct is the first application of such explanatory algorithms to the classification and localisation of breast lesions from medical imaging.\par
+
+% It's limitations
+\subsection{Dataset Considerations}
+\hl{subsection-needs-better-name}\\
+The BreakHis dataset, while covering a number of relevant lesion types with a significantly large number of examples for each type, presents some important challenges. Firstly, despite the multiple magnifications provided, images in the BreakHis dataset are not of high-resolution, taken with a digital camera with pixel size of 6.5$\mathrm{\mu m}$ and resolution of 480 TV lines. Secondly, the number of examples is extremely imbalanced between classes, with as much of a 7.5-fold difference between the least represented class and the most represented class.\par
+
+While low-resolution images can be useful for learning so-called ``global features'', they've proven to be problematic when distinguishing differences between objects with similar high-level features, as is the case between two H\&E images exhibiting different lesion subtypes. This problem is illustrated well in the description of Baidu's Deep Image model, whereby similar objects (such as insects of the same species) can only be distinguished from one another when higher-resolution images are considered in the model \citep{baidudeepimage}. Training the DeepDuct model on higher resolution datasets would address this concern. High-resolution datasets of breast lesions do exist, but many offer too few examples (INESCTC) or do not offer histological type information outside grade (CAMELYON16) \hl{citation-needed}.
+
+As described early, imbalances in the number of examples provided per class in the BreakHis dataset had lead to a strong bias towards over-represented classes (\textit{Figure \ref{fig:confmat}a}). This bias was addressed by oversampling all under-represented classes by duplicating examples until all classes in the training set contained the same number of examples (\textit{Figure \ref{fig:confmat}b}).
+
+\subsection{Future Directions \& Improvements}
+
+Implementing the DeepDuct model on smartphones would afford clinicians low-cost, mobile tools for the annotated classification of breast histology slides through use of commercial or 3D-printable smartphone-microscope adapters \citep{cellphone_microscope_platform}. A less computationally-complex mobile DeepDuct implementation would be required to account for the limited resources available on the platform. This is typically achieved either by a networked server-client model supported by computation in the cloud, or by replacing the deep, resource-heavy VGG16 model with a more shallow mobile-oriented model such as SqueezeNet \citep{squeezenet}. While the former is limited by patient-privacy compliance and network connectivity, the latter requires retraining the network on a shallower ConvNet architecture with potential losses in accuracy.
+
+Regional convolutional neural networks (R-CNNs), such as Facebook's Mask R-CNN, have been developed to provide pixel-resolution object detection in complex scenes \citep{mask_r_cnn}. Using a Mask R-CNN model trained on a breast lesion dataset can provide higher resolution lesion detection than existing patch-based breast lesion models \citep{wang2016}.
+
+%The DeepDuct algorithm might also be combined with regional convolutional neural network (R-CNN) algorithms such as Mask to provide both explanations (in the form of Grad-CAM heatmaps) as well as per-pixel
+
+%Limited computational resources reduce the practicality of CADe/x such as DeepDuct which are based on convolutional neural networks. Reducing computational complexity can be achieved by using smaller, mobile-oriented architectures such as SqueezeNet.
+
+% Improvements/Future Directions
+
+%The automated nature of feature selection in neural networks can also pose challenges if the dataset is of low-quality or very small; as differences between classes that are present in the dataset, but do not reflect differences between the classes as a concept, can severely bias a model. This is epitomised by the parable of ``the tank problem'', whereby a neural network trained by the US government to identify concealed tanks was actually identifying dark skies as the images of tanks in the dataset were taken on a cloudy day \citep{dreyfus1992}. Errors such as these are mitigated by assuring datasets are large and representative of the variation of the population. \par
