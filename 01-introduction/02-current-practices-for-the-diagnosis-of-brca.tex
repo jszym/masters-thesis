@@ -1,16 +1,20 @@
-%% NOTE
-%% The current practices section used to be in the intro to one of the ML chapters, but I:
-%% (1) don't want to make a redundant section in the second ML chapter, but 
-%% (2) am not sure if it's sufficiently global enough for the intro or 
-%% (3) is too "far away" from the ML sections
-
 \section{Current Practices for the Diagnosis of Early Breast Cancers}
-Patients which exhibit symptoms of mammary neoplasmas, or are otherwise suspected to be at elevated risk due to factors such as age or family history, are subjected to routine screening by mammography. The sensitivity with which mammography is able to detect cancerous lesions, especially in young patients or patients whose breast tissue\footnote{In the former group, the distinction between invasive and pre-invasive lesions is often unclear, while the dense tissue of the latter group can obscure and mask possible lesions} \citep{ayvaci2014}. In such cases, screening via ultrasound can be a viable alternative, as it offers greater sensitivity \citep{nothacker2009}.
+Patients which exhibit symptoms of mammary neoplasmas, or are otherwise suspected to be at elevated risk due to factors such as age or family history, are subjected to routine screening by mammography. The sensitivity with which mammography is able to detect cancerous lesions, especially in young patients or patients whose breast tissue is dense. In the former group, the distinction between invasive and pre-invasive lesions is often unclear, while the dense tissue of the latter group can obscure and mask possible lesions \citep{ayvaci2014}. In such cases, screening via ultrasound can be a viable alternative, as it offers greater sensitivity \citep{nothacker2009}.
 
 Suspected lesions detected during the process of screening are diagnosed by histopathological analysis of tissue biopsies \citep{nccn}. Tissue obtained through biopsy (core-needle, surgical, or otherwise) are sectioned onto glass slides, fixed and stained with relevant histological stains such as hematoxilin and eosin (H\&E).
 
-%% NOTE
-%% Possibly transition into molecular subtypes and their prognostic value. 
-%% Possibly further transition in to current attempts to predict molecular subtype/outcomes.
-
 Despite the standardised and continually refined methods and guidelines clinical pathologists rely on to identify breast cancer lesions from histological sections, there is a great deal of inconsistency and uncertainty that is becoming increasingly apparent. While some types of breast cancer (such as high-grade DCIS and LCIS) are more consistently and reliably identified than others, inter-observer agreement between clinical pathologists is mixed. In a retrospective study, agreement between pathologists for ADH, FEA, and low-grade DCIS regions was only moderate (0.44, 0.47, and 0.47 Cohen's $\kappa$ statistic, respectively) \citep{gomes2014}.\par
+
+Early breast lesions are associated with increased risk of invasive recurrence, and present important challenges for diagnosis by histopathology. Notably, in a consultation with clinical pathologists, a majority had cited distinguishing atypical ductal hyperplasias (ADH) from usual epithelial hyperplasias (UEH) and ductal carcinoma \textit{in situ} (DCIS) as the most common challenge among their breast biopsy consultations \citep{putti2005}. These distinctions are significant, as outcomes between these lesions are very different, and are the primary consideration when determining what treatment, if any, to pursue.\par
+
+Challenges like these can be mitigated in part by computationally assisted detection and diagnosis (CADe/CADx) software, which analyse medical images in a reproducible and quantitative manner with the aim of making the interpretation of these data by clinicians a less complex and subjective practice. While CADe software is sometimes used to aid in the screening of breast mammographies, challenges such as dimensional complexity has historically prevented the use of CADe/x to help interpret histological data \citep{rangayyan2007,madabhushi2009}.  \par
+
+Despite there being many breast cancer classification models described in the literature, a major limitation of these models is that they fail to model intra-tumour heterogeneity
+as they commonly adopt whole-field classification modalities \citep{pareja2017,weigelt2010}. Whole-field classification models similarly do
+not offer insight into so-called ``borderline'', which are lesions containing regions exhibiting features of multiple early lesions \citep{masood2011}.\par
+
+This work describes two models, the PPReCOGG model and the DeepDuct model, which are machine learning models that address the issue of intratumour heterogeneity by classifying subregions within histopathological sections of biopsies of breast lesions. 
+
+A model for the \textbf{p}er-\textbf{p}ixel \textbf{re}cognition of \textbf{c}ancers using \textbf{o}riented \textbf{G}abors on the \textbf{G}PU, PPReCOGG uses the $k$-nearest neighbours algorithm to produce high-resolution annotations of diagnostically-relevant cell patterning using texture-based features. The PPReCOGG model achieves a robust rate of accuracy with an average of $\approx94.3\%$ of pixels being correctly classified on synthetic validation classification tasks, and also is demonstrated to effectively identify sub-regions exhibiting characteristic neoplastic cell patterning in images of human early breast lesions.
+
+The DeepDuct model uses a pre-trained deep convolutional neural network model (namely, VGG16) fine-tuned on a dataset comprised of histological images of breast biopsies classified across eight different lesion types (the BreakHis dataset,  \textit{Figure \ref{fig:imagenet_v_breakhis}b}), and combines it with the Grad-CAM algorithm to provide general localisation of the various lesions identified, while providing an opportunity to better understand the model.

@@ -1,3 +1,28 @@
 \newpage
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
+
+The harbinger of a far more lethal and difficult-to-treat disease, 
+early breast cancer is a key, but often overlooked, point of study. 
+Early breast cancers are often difficult to detect and classify, and 
+the subjective nature of the histopathological methods used to detect 
+them often result in dissenting diagnoses between clinicians. These 
+issues can be mitigated through the use of quantitative computational 
+methods, although existing solutions do not account for the 
+heterogeneity of tumours, and often do not operate in manner that is
+transparent to the clinician; precluding their utility in a clinical 
+setting.
+
+This work presents two models which address the concerns of tumour 
+intraheterogeneity by detecting, classifying and annotating regions 
+within fields of breast biopsy sections that appear to belong to early 
+lesions. The PPReCOGG model, which is a GPU-accelerated texture-based 
+classifier, is able to generate pixel-resolution annotations of cell-patterning
+that is characteristic of early lesions with robust accuracy 
+($\approx94.3\%$ average accuracy in synthetic benchmarks). DeepDuct 
+is a deep learning model that provides accurate and transparent 
+localisation and classification of lesions using gradient-based class 
+activation maps (Grad-CAM). These two models illustrate that it is 
+possible to develop clinically relevant classifiers that can achieve 
+robust accuracy and account for tumour heterogeneity and model 
+transparency.

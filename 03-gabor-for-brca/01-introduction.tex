@@ -1,20 +1,20 @@
 \section{Introduction}
 
-When diagnosing breast cancer lesions, trained clinical pathologists rely on 
-visual interpretation of patient biopsies. While interobserver variability 
-between trained pathologists is a known problem, it is particularly pronounced 
-when pathologists are called to make distinction between early breast cancer 
+When diagnosing breast cancer lesions, trained clinical pathologists rely on
+visual interpretation of patient biopsies. While interobserver variability
+between trained pathologists is a known problem, it is particularly pronounced
+when pathologists are called to make distinction between early breast cancer
 lesion stages \citep{gomes2014}.\par
 
-Computer-aided detection (CADe) is sometimes used to enhance 
-interpretation of imaging from screening mammographies and can help manage the ambiguous and subjective nature of medical imaging; however computational models 
-are not currently used in most clinical settings to assist the diagnosis of breast 
+Computer-aided detection (CADe) is sometimes used to enhance
+interpretation of imaging from screening mammographies and can help manage the
+ambiguous and subjective nature of medical imaging; however computational models
+are not currently used in most clinical settings to assist the diagnosis of breast
 cancers.\par
 
-Despite many being described in the literature, a major limitation of most breast 
-cancer classification models is that they fail to model intra-tumour heterogeneity 
-as they commonly adopt whole-field classification modalities
-\citep{pareja2017,weigelt2010}. Whole-field classification models similarly do
+Despite many being described in the literature, a major limitation of most breast
+cancer classification models is that they fail to model intra-tumour heterogeneity
+as they commonly adopt whole-field classification modalities \citep{pareja2017,weigelt2010}. Whole-field classification models similarly do
 not offer insight into so-called ``borderline'', which are lesions containing regions exhibiting features of multiple early lesions \citep{masood2011}.\par
 
 To account for borderline lesions and the heterogeneous nature of cancer, a practical model for the classification of early lesions would be required to classify sub-regions of whole sections. As the characteristic ``cobblestone'' epithelial phenotype is altered distinctly
@@ -23,16 +23,16 @@ in the early progression of breast cancers, such a model would benefit from leve
 The observation that early lesions exhibit distinct cell patterning unique to themselves are reported in the first descriptions of hyperplasia and carcinoma \textit{in situ} of both the mammary duct and lobules by \cite{page1982}. The descriptions provided of the early lesion are strongly based on cellular architecture and patterning; distinguishing, for example, ductal and lobular carcinomas \emph{in situ} (DCIS and LCIS) from atypical ductal and lobular hyperplasias  (ADH and ALH) by ``...round, regular spacing''  in the former and their absence in the latter, sometimes exhibiting ``...swirls or streaming''.\par
 
 With the aim of developing a model that classifies regions of early neoplasms from whole sections of breast biopsy according to aberrations in their cell patterning, the authors here present a model for the per-pixel recognition of cancers
-using oriented Gabor filters on the GPU (henceforth referred to by the acronym 
-PPReCOGG). Analogous to the manner in which simple cortical cells perceive 
-patterns and texture, the Gabor filter and has long been used to 
-programmatically discern textures from one another 
-\citep{fogel1989, marcelja1980}. Its purpose in this model is as a 
+using oriented Gabor filters on the GPU (henceforth referred to by the acronym
+PPReCOGG). Analogous to the manner in which simple cortical cells perceive
+patterns and texture, the Gabor filter and has long been used to
+programmatically discern textures from one another
+\citep{fogel1989, marcelja1980}. Its purpose in this model is as a
 texture-dependent feature that differs between early cancer lesions according
 to their distinct epithelial patterning.\par
 
 The PPReCOGG model achieves a high rate of accuracy with an
-average of $\approx94.3\%$ of pixels being correctly classified on synthetic 
+average of $\approx94.3\%$ of pixels being correctly classified on synthetic
 validation classification tasks, and also is demonstrated to effectively identify sub-regions exhibiting characteristic neoplastic cell patterning in images of human early breast lesions.
 
 %The use of per-pixel texture analysis in PPReCOGG directly address these issues by annotating sub-regions, much like a trained pathologist would, of differing early stages.

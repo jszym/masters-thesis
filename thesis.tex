@@ -18,7 +18,8 @@
 \usepackage{soul}
 \usepackage{pifont}
 \usepackage[section]{placeins}
-
+\usepackage{amsmath}
+\raggedbottom
 
 \newcolumntype{C}[1]{>{\Centering}m{#1}}
 \renewcommand\tabularxcolumn[1]{C{#1}}
@@ -83,24 +84,21 @@
 %introduction
 
 \input{01-introduction/00-introduction.tex}
+\input{02-design-and-methods/00-design-and-methods.tex}
+\input{03-results/00-results.tex}
 
-\input{02-tj-early-brca/00-tj-early-brca.tex}
-\input{03-gabor-for-brca/00-gabor-for-brca.tex}
-\input{04-deepduct/00-deepduct.tex}
+%\input{03-gabor-for-brca/00-gabor-for-brca.tex}
+%\input{04-deepduct/00-deepduct.tex}
 
-%results
-%\input{03-results/00-results.tex}
 
 %discussion
-\input{05-discussion/00-discussion.tex}
+\input{04-discussion/00-discussion.tex}
 
 %bibliography
 \onehalfspacing
 \bibliographystyle{authordate1}
 \bibliography{references}
 \inputencoding{utf8}
-\input{06-appendix/00-appendix.tex}
-\newpage
-\theendnotes
+\input{05-appendix/00-appendix.tex}
 
 \end{document}
