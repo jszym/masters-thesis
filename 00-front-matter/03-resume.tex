@@ -1,3 +1,33 @@
 \newpage
 \section*{Résumé}
 \addcontentsline{toc}{section}{Résumé}
+
+Un signe avant-coureur d’une maladie beaucoup plus difficile à traiter, 
+le cancer du sein précoce est un sujet qui est important à étudier, mais 
+qui est souvent négligé. Il est souvent difficile à détecter les cancers 
+du sein précoce et pour les classifier. Les méthodes histopathologiques
+utilisées pour détecter les cancers du sein précoce sont très subjectives
+et résulte dans les diagnostics variables entre les cliniciennes et 
+les cliniciens. C'est possible de mitiger ces problèmes avec les systèmes
+informatiques quantitatifs, mais celles qui existe néglige de prendre
+en compte l'hétérogénéité intratumorale. C'est aussi souvent le cas que 
+ces systèmes informatiques fonctionnent dans une manière obscure et inconnue
+à leurs utilisateurs. Ces limitations empêchent l'utilisation de ces systèmes
+dans les contextes cliniques.
+
+Nous vous présentons deux systèmes informatiques qui étaient développés en  
+réponse du problème de l'hétérogénéité intratumorale. Ceci est accompli par  
+l'annotation des régions dans les champs de microscopies qui démontre des 
+sections des biopsies mammaires qui semblent d'appartenir à une tumeur à un
+stade précoce. Le système {\guillemotleft PPReCOGG\guillemotright} est 
+un classificateur accéléré par la GPU qui utilise les textures visuelles 
+pour identifier et annoter (avec haute résolution) des régions qui démontre 
+une configuration de cellules caractéristique des cancers précoces, tout 
+avec une précision très robuste (une précision moyenne de $\approx94{,}3\;\%$ 
+sur les essais synthétiques). {\guillemotleft DeepDuct\guillemotright} est 
+une système d'apprentissage automatique qui classifie et localise des tumeurs
+dans un façons précise et transparent en utilisant l'algorithm {\guillemotleft Grad-CAM\guillemotright}. Ces deux systèmes démontrent que c'est possible de 
+produire des classificateurs automatiques pour le cancer de sein
+qui sont utilisable dans un contexte clinique grâce à leurs hautes précisions, 
+capacité pour interpréter l'hétérogénéité intratumorale, est pour tous faire
+dans une manière transparente pour l'utilisateur.
